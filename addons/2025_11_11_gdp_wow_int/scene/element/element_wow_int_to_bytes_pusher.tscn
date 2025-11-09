@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://dudws4b76ti15"]
+
+[ext_resource type="Script" uid="uid://ckk2rwguxlltg" path="res://addons/2025_11_11_gdp_wow_int/script/wow_int_to_bytes_pusher.gd" id="1_5y82d"]
+[ext_resource type="Script" uid="uid://dsbgxaqlnktfo" path="res://addons/2025_11_11_gdp_wow_int/script/wow_delay_bytes_queue.gd" id="2_l3ld5"]
+[ext_resource type="Script" uid="uid://b66ckvmykthk4" path="res://addons/2025_11_11_gdp_wow_int/script/wow_bytes_to_single_udp.gd" id="3_jtqrr"]
+
+[node name="WowIntToBytesPusher" type="Node" node_paths=PackedStringArray("bytes_delayer")]
+script = ExtResource("1_5y82d")
+bytes_delayer = NodePath("WowDelayBytesQueue")
+metadata/_custom_type_script = "uid://ckk2rwguxlltg"
+
+[node name="WowDelayBytesQueue" type="Node" parent="."]
+script = ExtResource("2_l3ld5")
+metadata/_custom_type_script = "uid://dsbgxaqlnktfo"
+
+[node name="WowBytesToSingleUdp" type="Node" parent="."]
+script = ExtResource("3_jtqrr")
+target_port = 7073
+metadata/_custom_type_script = "uid://b66ckvmykthk4"
+
+[connection signal="on_bytes_to_push" from="." to="WowBytesToSingleUdp" method="push_bytes"]
+[connection signal="on_bytes_to_push" from="WowDelayBytesQueue" to="WowBytesToSingleUdp" method="push_bytes"]

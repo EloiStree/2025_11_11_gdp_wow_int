@@ -1,0 +1,68 @@
+[gd_scene load_steps=5 format=3 uid="uid://baf50kthqyiod"]
+
+[ext_resource type="PackedScene" uid="uid://dudws4b76ti15" path="res://addons/2025_11_11_gdp_wow_int/scene/element/element_wow_int_to_bytes_pusher.tscn" id="1_sdm01"]
+[ext_resource type="Script" uid="uid://d00un6ohbnk1w" path="res://addons/2025_11_11_gdp_wow_int/script/wow_input_to_integer.gd" id="2_820xr"]
+[ext_resource type="Script" uid="uid://b02b04700uiy1" path="res://addons/2025_11_11_gdp_wow_int/script/ui/abstract_wow_int_relay.gd" id="3_l8f1d"]
+[ext_resource type="Script" uid="uid://dnyi4uflcuqbx" path="res://addons/2025_11_11_gdp_wow_int/script/ui/ui2d_button_press_release_to_relay.gd" id="4_rgirq"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="WowIntPusher" type="Node" parent="."]
+
+[node name="WowIntToBytesPusher" parent="WowIntPusher" instance=ExtResource("1_sdm01")]
+default_player_claim_index = 77001
+
+[node name="InputToInteger" type="Node" parent="WowIntPusher"]
+script = ExtResource("2_820xr")
+input_to_integer_press_release = "Space|1024|2024
+Escape|1027|2027
+Space|1032|2032
+PageUp|1033|2033
+PageDown|1034|2034
+End|1035|2035
+Home|1036|2036
+Left|1037|2037
+Up|1038|2038
+Right|1039|2039
+Down|1040|2040
+F|1070|2070
+Tab|1009|2009
+0|1048|2048
+1|1049|2049
+2|1050|2050
+3|1051|2051
+4|1052|2052
+5|1053|2053
+6|1054|2054
+7|1055|2055"
+
+[node name="Camera3D" type="Camera3D" parent="."]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("3_l8f1d")
+
+[node name="AbstractWowIntRelay" type="Node" parent="Control"]
+script = ExtResource("3_l8f1d")
+metadata/_custom_type_script = "uid://b02b04700uiy1"
+
+[node name="Button" type="Button" parent="Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 2.375
+anchor_bottom = 2.275
+text = "Jump"
+
+[node name="Ui2DButtonPressReleaseToRelay" type="Node" parent="Control/Button" node_paths=PackedStringArray("parent_button_to_listen", "to_relay_at")]
+script = ExtResource("4_rgirq")
+parent_button_to_listen = NodePath("..")
+to_relay_at = NodePath("../../AbstractWowIntRelay")
+metadata/_custom_type_script = "uid://dnyi4uflcuqbx"
+
+[connection signal="on_integer_input" from="WowIntPusher/InputToInteger" to="WowIntPusher/WowIntToBytesPusher" method="push_integer_value"]
+[connection signal="on_relayed_integer" from="Control/AbstractWowIntRelay" to="WowIntPusher/WowIntToBytesPusher" method="push_integer_value"]
