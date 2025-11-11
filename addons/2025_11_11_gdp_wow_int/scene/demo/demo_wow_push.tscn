@@ -1,9 +1,16 @@
-[gd_scene load_steps=5 format=3 uid="uid://baf50kthqyiod"]
+[gd_scene load_steps=9 format=3 uid="uid://baf50kthqyiod"]
 
 [ext_resource type="PackedScene" uid="uid://dudws4b76ti15" path="res://addons/2025_11_11_gdp_wow_int/scene/element/element_wow_int_to_bytes_pusher.tscn" id="1_sdm01"]
 [ext_resource type="Script" uid="uid://d00un6ohbnk1w" path="res://addons/2025_11_11_gdp_wow_int/script/wow_input_to_integer.gd" id="2_820xr"]
 [ext_resource type="Script" uid="uid://b02b04700uiy1" path="res://addons/2025_11_11_gdp_wow_int/script/ui/abstract_wow_int_relay.gd" id="3_l8f1d"]
 [ext_resource type="Script" uid="uid://dnyi4uflcuqbx" path="res://addons/2025_11_11_gdp_wow_int/script/ui/ui2d_button_press_release_to_relay.gd" id="4_rgirq"]
+[ext_resource type="Script" uid="uid://u8fsecy2dexw" path="res://addons/2025_11_11_gdp_wow_int/script/resource/script/game_input_seconds_ninja.gd" id="5_c73t2"]
+[ext_resource type="Script" uid="uid://r5uaot3l4qtl" path="res://addons/2025_11_11_gdp_wow_int/script/sample_game_input/ninja_level_1.gd" id="6_34exw"]
+[ext_resource type="Script" uid="uid://d1xsnqop4pqw5" path="res://addons/2025_11_11_gdp_wow_int/script/resource/script/int_input_resource_10_seconds_ninja.gd" id="6_c73t2"]
+
+[sub_resource type="Resource" id="Resource_c73t2"]
+script = ExtResource("6_c73t2")
+metadata/_custom_type_script = "uid://d1xsnqop4pqw5"
 
 [node name="Node3D" type="Node3D"]
 
@@ -64,5 +71,15 @@ parent_button_to_listen = NodePath("..")
 to_relay_at = NodePath("../../AbstractWowIntRelay")
 metadata/_custom_type_script = "uid://dnyi4uflcuqbx"
 
+[node name="GameInputSecondsNinja" type="Node" parent="."]
+script = ExtResource("5_c73t2")
+game_input = SubResource("Resource_c73t2")
+metadata/_custom_type_script = "uid://lxfut6h6t3fe"
+
+[node name="Node" type="Node" parent="GameInputSecondsNinja" node_paths=PackedStringArray("ninja")]
+script = ExtResource("6_34exw")
+ninja = NodePath("..")
+
 [connection signal="on_integer_input" from="WowIntPusher/InputToInteger" to="WowIntPusher/WowIntToBytesPusher" method="push_integer_value"]
 [connection signal="on_relayed_integer" from="Control/AbstractWowIntRelay" to="WowIntPusher/WowIntToBytesPusher" method="push_integer_value"]
+[connection signal="on_relay_integer_action" from="GameInputSecondsNinja" to="WowIntPusher/WowIntToBytesPusher" method="push_integer_value"]

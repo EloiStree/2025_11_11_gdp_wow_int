@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="IntInputResource_10SecondsNinja" load_steps=2 format=3 uid="uid://bjtxa5bxmfyxb"]
+
+[ext_resource type="Script" path="res://addons/2025_11_11_gdp_wow_int/script/resource/script/ninja_input_map.gd" id="1_6dvf4"]
+
+[resource]
+script = ExtResource("1_6dvf4")
+metadata/_custom_type_script = "uid://pnwftboikehd"
