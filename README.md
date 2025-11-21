@@ -4,7 +4,7 @@ git submodule update --init --recursive
 ```
 
 
-# 2025_11_11_gdp_wow_int_utility
+# 2025_11_11_gdp_wow_int
 Scratch to Warcraft integer utility to simulate keyboard and mouse from Godot
 
 - https://github.com/EloiStree/2025_10_27_gdp_udp_in_out_gate
