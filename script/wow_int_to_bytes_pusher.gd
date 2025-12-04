@@ -4,6 +4,7 @@ extends Node
 signal on_bytes_to_push(pushed: PackedByteArray)
 
 @export var bytes_delayer:WowDelayBytesQueue
+@export var connect_delayer_at_ready:bool =true
 @export var ntp_local_to_server_milliseconds: int = 0
 @export var default_player_claim_index: int = 0
 
@@ -12,6 +13,9 @@ signal on_bytes_to_push(pushed: PackedByteArray)
 @export var as_text_sent: String 
 @export var as_bytes_sent: PackedByteArray 
 
+func _ready() -> void:
+	if connect_delayer_at_ready:
+		bytes_delayer.on_bytes_to_push.connect(push_bytes)
 
 func _process(delta: float) -> void:
 	var bytes_to_push_list: Array[PackedByteArray] = bytes_delayer.check_for_pack_to_push()
