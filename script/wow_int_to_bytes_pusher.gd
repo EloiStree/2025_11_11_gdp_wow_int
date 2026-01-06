@@ -121,3 +121,7 @@ func _on_int_input_for_10_seconds_ninja_on_integer_action_requested(integer_valu
 
 func _on_play_with_10_seconds_ninja_on_integer_relayed(int_value: int) -> void:
 	pass # Replace with function body.
+
+
+func _on_play_with_stealth_bastard_on_integer_relayed(int_value: int) -> void:
+	pass # Replace with function body.
