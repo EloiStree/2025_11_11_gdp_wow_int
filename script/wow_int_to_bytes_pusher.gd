@@ -111,17 +111,5 @@ func push_with_local_delay_player_index_and_integer_value_in_seconds(player_inde
 	debug_text("pi:" + str(player_index) + " Vi:" + str(integer_value)+" delay:" + str(milliseconds_delay))
 
 
-func _on_int_input_for_arc_raider_on_integer_delay_action_requested_in_milliseconds(integer_value: int, milliseconds_delay: int) -> void:
-	pass # Replace with function body.
-
-
-func _on_int_input_for_10_seconds_ninja_on_integer_action_requested(integer_value: int) -> void:
-	pass # Replace with function body.
-
-
-func _on_play_with_10_seconds_ninja_on_integer_relayed(int_value: int) -> void:
-	pass # Replace with function body.
-
-
-func _on_play_with_stealth_bastard_on_integer_relayed(int_value: int) -> void:
+func _on_ui_2d_broadcast_control_buttons_on_integer_value_relayed(integer_value: int) -> void:
 	pass # Replace with function body.
